@@ -55,7 +55,6 @@ def main():
     goblin = Goblin("Mudknuckle the Goblin", 20, 50)
 
     while goblin.alive() and hero.alive():
-        print("The goblin has {} health and {} power.".format(goblin.health, goblin.power))
         print()
         print("What do you want to do?")
         print("1. fight goblin")
