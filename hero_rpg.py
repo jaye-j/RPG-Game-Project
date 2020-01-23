@@ -75,6 +75,16 @@ class Wizard(Character):
         if enemy.health <= 0:
             print(f"{enemy.name} has been defeated!\n")
 
+class Knight(Hero):
+    def dialogue(self, hero):
+        self.knightly_quotes = ["Tis' just a fleshwound.", f"My task is set, {hero.name} you will be defeated!", "You are a fool for challenging me.", "Knighthood lies above eternity; it doesn't live off fame, but rather deeds.", "Did somebody lose thier sweet roll?", "Time to cleanse the empire of its filth."]
+        self.rand_index = 0
+        self.rand_index = random.randint(0, (len(self.knightly_quotes)-1))
+        print(self.knightly_quotes[self.rand_index])
+
+class Yogi(Character):
+    pass
+
 
 
 def main():
@@ -84,7 +94,9 @@ def main():
     medic = Medic("Healy McHealerFace", 200, 10)
     shadow = Shadow("The Goat Man", 1, 2)
     oldman = Oldman("Mysterious Old Man", 10, 10)
-    wizard = Wizard("Aleister The Spellcaster", 100, 30)
+    wizard = Wizard("Aleister The Spellcaster", 100, 20)
+    knight = Knight("Sir Gawayne the Handsome", 100, 20)
+    yogi = Yogi("Ravi Shankar", 1, 1)
 
     while goblin.alive() and hero.alive():
         print()
@@ -318,5 +330,85 @@ def main():
         if wizard.health > 0:
             # Wizard attacks Hero
             wizard.attack(hero)
+
+    print(f"{knight.name} approaches!\n")
+
+    while knight.alive() and hero.alive():
+        print()
+        print(f"{knight.name} approaches!\n")
+        hero.print_status()
+        knight.print_status()
+        print()
+        print("What do you want to do?")
+        print(f"1. fight {knight.name}")
+        print("2. do nothing")
+        print("3. flee")
+        print("> ", end=' ')
+        raw_input = input()
+        print("-"*55)
+
+
+        if raw_input == "1":
+            # Hero attacks Knight
+            hero.attack(knight)
+
+        elif raw_input == "2":
+            #Hero does nothing... idiot.
+            print("You're stupid! Why would you do nothing?!\n")
+            pass
+
+        elif raw_input == "3":
+            #Hero flees enemy.
+            print(f"{hero.name} flees from {knight.name}.\n")
+            break
+
+        else:
+            print(f"Invalid input {raw_input}.\n")
+
+        if knight.health > 0:
+            # Knight attacks Hero
+            print()
+            knight.dialogue(hero)
+            print()
+            knight.attack(hero)
+
+    print(f"{yogi.name} approaches!\n")
+
+    while yogi.alive() and hero.alive():
+        print()
+        print(f"{yogi.name} approaches!\n")
+        hero.print_status()
+        yogi.print_status()
+        print()
+        print("What do you want to do?")
+        print(f"1. fight {yogi.name}")
+        print("2. do nothing")
+        print("3. flee")
+        print("> ", end=' ')
+        raw_input = input()
+        print("-"*55)
+
+
+        if raw_input == "1":
+            # Hero attacks yogi but yogi forces hero to flee
+            print("Violence is not the answer.\n")
+            print(f"{yogi.name} forces {hero.name} to flee.\n")
+            break
+
+        elif raw_input == "2":
+            print()
+            print("I bless you with my powers.\n")
+            hero.health += 5
+            print(f"{yogi.name} has healed you.\n")
+            hero.print_status()
+            break
+
+        elif raw_input == "3":
+            print(f"{yogi.name} waves goodbye in a Downward Dog.\n")
+            break
+
+        else:
+            print(f"Invalid input {raw_input}.\n")
+
 
 main()
