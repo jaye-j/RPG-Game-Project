@@ -56,6 +56,7 @@ class Zombie(Character):
 
 class Medic(Character):
     def health_recuperate(self):
+        #randomly heals self by 2 points.
         if random.randint(1, 6) == 2:
             self.health += 2
             print(f"{self.name} heals self by 2 health points.\n")
@@ -68,6 +69,7 @@ class Oldman(Character):
 
 class Wizard(Character):
     def attack(self, enemy):
+        #Casts a spell dialogue.
         enemy.health -= self.power
         print(f"{self.name} casts a spell on {enemy.name} and deals {self.power} damage.\n")
         if enemy.health <= 0:
