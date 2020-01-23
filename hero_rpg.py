@@ -18,7 +18,7 @@ class Character:
         enemy.health -= self.power
         print(f"{self.name} does {self.power} damage to the {enemy.name}.\n")
         if enemy.health <= 0:
-            print(f"{enemy.name} is dead.\n")
+            print(f"{enemy.name} has been defeated!\n")
 
 
     def alive(self):
@@ -36,14 +36,14 @@ class Hero(Character):
         print(f"{self.name} does {self.damage} damage to {enemy.name}.")
         enemy.health -= self.damage
         if enemy.health <= 0:
-            print(f"{enemy.name} has been defeated!")
+            print(f"{enemy.name} has been defeated!\n")
 
     def crit_multiplier(self):
         #Hero has a 20% chance of doing double the damage to its opponent.
         self.crit_multi = 1
         if random.randint(1, 6) == 3:
             self.crit_multi = 2
-            print(f"{self.name} lands a CRITICAL HIT!")
+            print(f"{self.name} lands a CRITICAL HIT!\n")
         return self.crit_multi
 
 class Goblin(Character):
@@ -54,77 +54,172 @@ class Zombie(Character):
         #Zombie never dies and while loop will never break unless flee is chosen or hero dies.
         return True
 
+class Medic(Character):
+    def health_recuperate(self):
+        if random.randint(1, 6) == 2:
+            self.health += 2
+            print(f"{self.name} heals self by 2 health points.\n")
+
+class Shadow(Character):
+    pass
+
+
 
 
 def main():
     hero = Hero("Sir Jaye the Great", 100, 100)
-    goblin = Goblin("Mudknuckle the Goblin", 150, 20)
-    zombie = Zombie("Graveyard Betty", 1000, 10) 
+    goblin = Goblin("Mudknuckle the Goblin", 105, 15)
+    zombie = Zombie("Graveyard Betty", 1000, 10)
+    medic = Medic("Healy McHealerFace", 200, 10)
+    shadow = Shadow("The Goat Man", 1, 5)
 
     while goblin.alive() and hero.alive():
+        print()
+        print(f"{goblin.name} approaches!\n")
         hero.print_status()
         goblin.print_status()
         print()
         print("What do you want to do?")
-        print("1. fight goblin")
+        print(f"1. fight {goblin.name}")
         print("2. do nothing")
         print("3. flee")
         print("> ", end=' ')
-
         raw_input = input()
+        print("-"*55)
+
 
         if raw_input == "1":
             # Hero attacks goblin
             hero.attack(goblin)
 
         elif raw_input == "2":
-            print("You're stupid! Why would you do nothing?!")
+            #Hero does nothing... idiot.
+            print("You're stupid! Why would you do nothing?!\n")
             pass
 
         elif raw_input == "3":
-            print(f"{hero.name} flees from {goblin.name}.")
+            #Hero flees enemy.
+            print(f"{hero.name} flees from {goblin.name}.\n")
             break
 
         else:
-            print(f"Invalid input {raw_input}")
+            print(f"Invalid input {raw_input}.\n")
 
         if goblin.health > 0:
-            # Goblin attacks hero
+            # Goblin attacks Hero
             goblin.attack(hero)
 
-    print(f"{hero.name} approaches a new enemy!\n")
+    print(f"{zombie.name} approaches!\n")
 
     while zombie.alive() and hero.alive():
         hero.print_status()
         zombie.print_status()
         print()
         print("What do you want to do?")
-        print("1. fight Zombie")
+        print(f"1. fight {zombie.name}")
         print("2. do nothing")
         print("3. flee")
         print("> ", end=' ')
-
         raw_input = input()
+        print("-"*55)
 
         if raw_input == "1":
             # Hero attacks Zombie
             hero.attack(zombie)
 
         elif raw_input == "2":
+            #Hero does nothing... idiot.
             print("You're stupid! Why would you do nothing?!\n")
             pass
 
         elif raw_input == "3":
-            print(f"{hero.name} flees from {zombie.name}.")
+            #Hero flees enemy.
+            print(f"{hero.name} flees from {zombie.name}.\n")
             break
 
         else:
-            print(f"Invalid input {raw_input}")
+            print(f"Invalid input {raw_input}.\n")
 
         if zombie.health > 0:
             # Zombie attacks Hero
             zombie.attack(hero)
 
+    print(f"{medic.name} approaches!\n")
+
+    while medic.alive() and hero.alive():
+        hero.print_status()
+        medic.print_status()
+        print()
+        print("What do you want to do?")
+        print(f"1. fight {medic.name}")
+        print("2. do nothing")
+        print("3. flee")
+        print("> ", end=' ')
+        raw_input = input()
+        print("-"*55)
+
+        if raw_input == "1":
+            # Hero attacks Medic
+            hero.attack(medic)
+            medic.health_recuperate()
+
+        elif raw_input == "2":
+            #Hero does nothing... idiot.
+            print("You're stupid! Why would you do nothing?!\n")
+            pass
+
+        elif raw_input == "3":
+            #Hero flees enemy.
+            print(f"{hero.name} flees from {medic.name}.\n")
+            break
+
+        else:
+            print(f"Invalid input {raw_input}.\n")
+
+        if medic.health > 0:
+            # Medic attacks Hero
+            medic.attack(hero)
+
+    print(f"{shadow.name} approaches!\n")
+
+    while shadow.alive() and hero.alive():
+        print()
+        print(f"{shadow.name} approaches!\n")
+        hero.print_status()
+        shadow.print_status()
+        print()
+        print("What do you want to do?")
+        print(f"1. fight {shadow.name}")
+        print("2. do nothing")
+        print("3. flee")
+        print("> ", end=' ')
+        raw_input = input()
+        print("-"*55)
+
+
+        if raw_input == "1":
+            # Hero attacks Shadow
+            if random.randint(1, 11) == 2:
+                hero.attack(shadow)
+            else:
+                print(f"{shadow.name} dodges the attack!")
+
+        elif raw_input == "2":
+            #Hero does nothing... idiot.
+            print("You're stupid! Why would you do nothing?!\n")
+            pass
+
+        elif raw_input == "3":
+            #Hero flees enemy.
+            print(f"{hero.name} flees from {shadow.name}.\n")
+            break
+
+        else:
+            print(f"Invalid input {raw_input}.\n")
+
+        if shadow.health > 0:
+            # Shadow attacks Hero
+            shadow.attack(hero)
 
 
 
