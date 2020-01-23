@@ -63,15 +63,26 @@ class Medic(Character):
 class Shadow(Character):
     pass
 
+class Oldman(Character):
+    pass
+
+class Wizard(Character):
+    def attack(self, enemy):
+        enemy.health -= self.power
+        print(f"{self.name} casts a spell on {enemy.name} and deals {self.power} damage.\n")
+        if enemy.health <= 0:
+            print(f"{enemy.name} has been defeated!\n")
 
 
 
 def main():
-    hero = Hero("Sir Jaye the Great", 100, 100)
-    goblin = Goblin("Mudknuckle the Goblin", 105, 15)
+    hero = Hero("Sir Jaye the Great", 200, 100)
+    goblin = Goblin("Mudknuckle the Goblin", 100, 15)
     zombie = Zombie("Graveyard Betty", 1000, 10)
     medic = Medic("Healy McHealerFace", 200, 10)
-    shadow = Shadow("The Goat Man", 1, 5)
+    shadow = Shadow("The Goat Man", 1, 2)
+    oldman = Oldman("Mysterious Old Man", 10, 10)
+    wizard = Wizard("Aleister The Spellcaster", 100, 30)
 
     while goblin.alive() and hero.alive():
         print()
@@ -109,6 +120,7 @@ def main():
             # Goblin attacks Hero
             goblin.attack(hero)
 
+
     print(f"{zombie.name} approaches!\n")
 
     while zombie.alive() and hero.alive():
@@ -143,6 +155,7 @@ def main():
         if zombie.health > 0:
             # Zombie attacks Hero
             zombie.attack(hero)
+
 
     print(f"{medic.name} approaches!\n")
 
@@ -180,6 +193,7 @@ def main():
             # Medic attacks Hero
             medic.attack(hero)
 
+
     print(f"{shadow.name} approaches!\n")
 
     while shadow.alive() and hero.alive():
@@ -202,7 +216,7 @@ def main():
             if random.randint(1, 11) == 2:
                 hero.attack(shadow)
             else:
-                print(f"{shadow.name} dodges the attack!")
+                print(f"{shadow.name} dodges the attack!\n")
 
         elif raw_input == "2":
             #Hero does nothing... idiot.
@@ -222,5 +236,85 @@ def main():
             shadow.attack(hero)
 
 
+    print(f"{oldman.name} approaches!\n")
+
+    while oldman.alive() and hero.alive():
+        print()
+        print(f"{oldman.name} approaches!\n")
+        hero.print_status()
+        oldman.print_status()
+        print()
+        print("What do you want to do?")
+        print(f"1. fight {oldman.name}")
+        print("2. do nothing")
+        print("3. flee")
+        print("> ", end=' ')
+        raw_input = input()
+        print("-"*55)
+
+
+        if raw_input == "1":
+            # Hero attacks Oldman
+            if random.randint(1, 6) == 2:
+                hero.attack(oldman)
+            else:
+                print(f"{oldman.name} dodges the attack!\n")
+
+
+        elif raw_input == "2":
+            #Hero does nothing... idiot.
+            print("You're stupid! Why would you do nothing?!\n")
+            pass
+
+        elif raw_input == "3":
+            #Hero flees enemy.
+            print(f"{hero.name} flees from {oldman.name}.\n")
+            break
+
+        else:
+            print(f"Invalid input {raw_input}.\n")
+
+        if oldman.health > 0:
+            # Oldman attacks Hero
+            oldman.attack(hero)
+
+
+    print(f"{wizard.name} approaches!\n")
+
+    while wizard.alive() and hero.alive():
+        print()
+        print(f"{wizard.name} approaches!\n")
+        hero.print_status()
+        wizard.print_status()
+        print()
+        print("What do you want to do?")
+        print(f"1. fight {wizard.name}")
+        print("2. do nothing")
+        print("3. flee")
+        print("> ", end=' ')
+        raw_input = input()
+        print("-"*55)
+
+
+        if raw_input == "1":
+            # Hero attacks Wizard
+            hero.attack(wizard)
+
+        elif raw_input == "2":
+            #Hero does nothing... idiot.
+            print("You're stupid! Why would you do nothing?!\n")
+            pass
+
+        elif raw_input == "3":
+            #Hero flees enemy.
+            print(f"{hero.name} flees from {wizard.name}.\n")
+            break
+
+        else:
+            print(f"Invalid input {raw_input}.\n")
+
+        if wizard.health > 0:
+            # Wizard attacks Hero
+            wizard.attack(hero)
 
 main()
