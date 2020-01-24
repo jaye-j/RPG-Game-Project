@@ -10,10 +10,11 @@ import random
 #Characters
 
 class Character:
-    def __init__(self, name, health, power):
+    def __init__(self, name, health, power, coins):
         self.name = name
         self.health = health
         self.power = power
+        self.coins = coins
     
     def attack(self, enemy):
         enemy.health -= self.power
@@ -37,7 +38,9 @@ class Hero(Character):
         print(f"{self.name} does {self.damage} damage to {enemy.name}.")
         enemy.health -= self.damage
         if enemy.health <= 0:
-            print(f"{enemy.name} has been defeated!\n")
+            print(f"{enemy.name} has been defeated!")
+            self.coins += enemy.coins
+            print(f"You gained {enemy.coins} coins. You now have {self.coins} coins.")
 
     def crit_multiplier(self):
         #Hero has a 20% chance of doing double the damage to its opponent.
@@ -129,20 +132,14 @@ class Store(object):
             print("=====================")
             print("Welcome to the store!")
             print("=====================")
-            print("You have {} coins.".format(hero.coins))
+            print(f"You have {hero.coins} coins.")
             print("What do you want to do?")
-
             for i in range(len(Store.items)):
-
                 item = Store.items[i]
-
-                print("{}. buy {} ({})".format(i + 1, item.name, item.cost))
+                print(f"{i + 1}. buy {item.name} ({item.cost})")
             print("10. leave")
-
             raw_imp = int(input("> "))
-
             if raw_imp == 10:
-
                 break
 
             else:
@@ -153,18 +150,26 @@ class Store(object):
 
                 hero.buy(item)
 
+    def go_to_store(self, character):
+        store_status = int(input("""Would you like to go to the store or continue journey? 
+    1. Go to store.
+    2. Continue the journey."""))
+        if store_status == 1:
+            self.do_shopping(character)
 
 
 def main():
-    hero = Hero("Sir Jaye the Great", 200, 100)
-    goblin = Goblin("Mudknuckle the Goblin", 100, 15)
-    zombie = Zombie("Graveyard Betty", 1000, 10)
-    medic = Medic("Healy McHealerFace", 200, 10)
-    shadow = Shadow("The Goat Man", 1, 2)
-    oldman = Oldman("Mysterious Old Man", 10, 10)
-    wizard = Wizard("Aleister The Spellcaster", 100, 20)
-    knight = Knight("Sir Gawayne the Handsome", 100, 20)
-    yogi = Yogi("Ravi Shankar", 1, 1)
+    hero = Hero("Sir Jaye the Great", 200, 100, 0)
+    goblin = Goblin("Mudknuckle the Goblin", 100, 15, 10)
+    zombie = Zombie("Graveyard Betty", 1000, 50, 100)
+    medic = Medic("Healy McHealerFace", 200, 10, 15)
+    shadow = Shadow("The Goat Man", 1, 2, 20)
+    oldman = Oldman("Mysterious Old Man", 10, 10, 5)
+    wizard = Wizard("Aleister The Spellcaster", 100, 20, 20)
+    knight = Knight("Sir Gawayne the Handsome", 150, 25, 25)
+    yogi = Yogi("Ravi Shankar", 1, 1, 0)
+    
+    store = Store()
 
 
     print()
@@ -203,6 +208,8 @@ def main():
             # Goblin attacks Hero
             goblin.attack(hero)
 
+    store.go_to_store(hero)
+
     print()
     print(f"{zombie.name} approaches!\n")
     while zombie.alive() and hero.alive():
@@ -238,6 +245,7 @@ def main():
             # Zombie attacks Hero
             zombie.attack(hero)
 
+    store.go_to_store(hero)
 
     print()
     print(f"{medic.name} approaches!\n")
@@ -275,6 +283,7 @@ def main():
             # Medic attacks Hero
             medic.attack(hero)
 
+    store.go_to_store(hero)
 
     print()
     print(f"{shadow.name} approaches!\n")
@@ -315,6 +324,7 @@ def main():
             # Shadow attacks Hero
             shadow.attack(hero)
 
+    store.go_to_store(hero)
 
     print()
     print(f"{oldman.name} approaches!\n")
@@ -356,6 +366,7 @@ def main():
             # Oldman attacks Hero
             oldman.attack(hero)
 
+    store.go_to_store(hero)
 
     print()
     print(f"{wizard.name} approaches!\n")
@@ -393,6 +404,7 @@ def main():
             # Wizard attacks Hero
             wizard.attack(hero)
 
+    store.go_to_store(hero)
 
     print()
     print(f"{knight.name} approaches!\n")
@@ -433,6 +445,7 @@ def main():
             print()
             knight.attack(hero)
 
+    store.go_to_store(hero)
 
     print()
     print(f"{yogi.name} approaches!\n")
@@ -469,6 +482,8 @@ def main():
 
         else:
             print(f"Invalid input {raw_input}.\n")
+
+    store.go_to_store(hero)
 
 
 main()
