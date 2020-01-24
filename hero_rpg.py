@@ -7,6 +7,7 @@
 # 3. flee
 import random
 
+#Characters
 
 class Character:
     def __init__(self, name, health, power):
@@ -56,7 +57,7 @@ class Zombie(Character):
 
 class Medic(Character):
     def health_recuperate(self):
-        #randomly heals self by 2 points.
+        #Randomly heals self by 2 points.
         if random.randint(1, 6) == 2:
             self.health += 2
             print(f"{self.name} heals self by 2 health points.\n")
@@ -85,6 +86,73 @@ class Knight(Hero):
 class Yogi(Character):
     pass
 
+#Store
+
+class Tonic(object):
+
+    cost = 5
+
+    name = 'tonic'
+
+    def apply(self, character):
+
+        character.health += 2
+
+        print("{}'s health increased to {}.".format(character.name, character.health))
+
+
+class Sword(object):
+
+    cost = 10
+
+    name = 'sword'
+
+    def apply(self, hero):
+
+        hero.power += 2
+
+        print("{}'s power increased to {}.".format(hero.name, hero.power))
+
+class Store(object):
+
+    # If you define a variable in the scope of a class:
+
+    # This is a class variable and you can access it like
+
+    # Store.items => [Tonic, Sword]
+
+    items = [Tonic, Sword]
+
+    def do_shopping(self, hero):
+
+        while True:
+            print("=====================")
+            print("Welcome to the store!")
+            print("=====================")
+            print("You have {} coins.".format(hero.coins))
+            print("What do you want to do?")
+
+            for i in range(len(Store.items)):
+
+                item = Store.items[i]
+
+                print("{}. buy {} ({})".format(i + 1, item.name, item.cost))
+            print("10. leave")
+
+            raw_imp = int(input("> "))
+
+            if raw_imp == 10:
+
+                break
+
+            else:
+
+                ItemToBuy = Store.items[raw_imp - 1]
+
+                item = ItemToBuy()
+
+                hero.buy(item)
+
 
 
 def main():
@@ -98,9 +166,10 @@ def main():
     knight = Knight("Sir Gawayne the Handsome", 100, 20)
     yogi = Yogi("Ravi Shankar", 1, 1)
 
+
+    print()
+    print(f"{goblin.name} approaches!\n")
     while goblin.alive() and hero.alive():
-        print()
-        print(f"{goblin.name} approaches!\n")
         hero.print_status()
         goblin.print_status()
         print()
@@ -134,9 +203,8 @@ def main():
             # Goblin attacks Hero
             goblin.attack(hero)
 
-
+    print()
     print(f"{zombie.name} approaches!\n")
-
     while zombie.alive() and hero.alive():
         hero.print_status()
         zombie.print_status()
@@ -171,8 +239,8 @@ def main():
             zombie.attack(hero)
 
 
+    print()
     print(f"{medic.name} approaches!\n")
-
     while medic.alive() and hero.alive():
         hero.print_status()
         medic.print_status()
@@ -208,11 +276,9 @@ def main():
             medic.attack(hero)
 
 
+    print()
     print(f"{shadow.name} approaches!\n")
-
     while shadow.alive() and hero.alive():
-        print()
-        print(f"{shadow.name} approaches!\n")
         hero.print_status()
         shadow.print_status()
         print()
@@ -250,11 +316,9 @@ def main():
             shadow.attack(hero)
 
 
+    print()
     print(f"{oldman.name} approaches!\n")
-
     while oldman.alive() and hero.alive():
-        print()
-        print(f"{oldman.name} approaches!\n")
         hero.print_status()
         oldman.print_status()
         print()
@@ -293,11 +357,9 @@ def main():
             oldman.attack(hero)
 
 
+    print()
     print(f"{wizard.name} approaches!\n")
-
     while wizard.alive() and hero.alive():
-        print()
-        print(f"{wizard.name} approaches!\n")
         hero.print_status()
         wizard.print_status()
         print()
@@ -331,11 +393,10 @@ def main():
             # Wizard attacks Hero
             wizard.attack(hero)
 
-    print(f"{knight.name} approaches!\n")
 
+    print()
+    print(f"{knight.name} approaches!\n")
     while knight.alive() and hero.alive():
-        print()
-        print(f"{knight.name} approaches!\n")
         hero.print_status()
         knight.print_status()
         print()
@@ -372,11 +433,10 @@ def main():
             print()
             knight.attack(hero)
 
-    print(f"{yogi.name} approaches!\n")
 
+    print()
+    print(f"{yogi.name} approaches!\n")
     while yogi.alive() and hero.alive():
-        print()
-        print(f"{yogi.name} approaches!\n")
         hero.print_status()
         yogi.print_status()
         print()
@@ -391,15 +451,15 @@ def main():
 
         if raw_input == "1":
             # Hero attacks yogi but yogi forces hero to flee
-            print("Violence is not the answer.\n")
+            print("Violence is not the answer! BE GONE!\n")
             print(f"{yogi.name} forces {hero.name} to flee.\n")
             break
 
         elif raw_input == "2":
             print()
             print("I bless you with my powers.\n")
-            hero.health += 5
-            print(f"{yogi.name} has healed you.\n")
+            hero.health += 10
+            print(f"{yogi.name} has healed you by 10 health points.\n")
             hero.print_status()
             break
 
