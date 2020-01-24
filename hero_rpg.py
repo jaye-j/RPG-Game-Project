@@ -107,70 +107,83 @@ class Yogi(Character):
 
 #Store
 
-class SuperTonic(object):
-
-    cost = 5
-
-    name = 'tonic'
+class SmallTonic:
+    def __init__(self):
+        self.cost = 5
+        self.name = 'Small Tonic'
 
     def apply(self, character):
+        character.health += 5
+        print(f"{character.name}'s health increased to {character.health}.\n")
 
+class SuperTonic:
+    def __init__(self):
+        self.cost = 10
+        self.name = 'Super Tonic'
+
+    def apply(self, character):
         character.health += 10
+        print(f"{character.name}'s health increased to {character.health}.\n")
 
-        print(f"{character.name}'s health increased to {character.health}.")
-
-class Evade(object):
-
-    cost = 5
-
-    name = 'evade'
-
+class Evade:
+    def __init__(self):
+        self.cost = 5
+        self.name = 'Evade'
+        self.use_count = 0
     def apply(self, character):
+        self.use_count += 1
+        if self.use_count <= 2:
+            character.evade += 2
+            print(f"{character.name}'s evade has increased to {character.evade}.\n")
+        else:
+            character.coins += self.cost
+            print(f"{self.name} is sold out. Here's your coins back, stupid.")
+            print(f"Store Keeper has given you back your {self.cost} coins back.\n")
 
-        character.evade += 2
-
-        print(f"{character.name}'s evade has increased to {character.evade}.")
-
-class Armor(object):
-
-    cost = 10
-
-    name = 'armor'
-
+class Armor:
+    def __init__(self):
+        self.cost = 10
+        self.name = 'Steel Armor'
     def apply(self, character):
-
         character.armor += 10
+        print(f"{character.name}'s armor increased to {character.armor}.\n")
 
-        print(f"{character.name}'s armor increased to {character.armor}.")
+class Sword:
+    def __init__(self):
+        self.cost = 10
+        self.name = 'Great Sword'
+    def apply(self, character):
+        character.power += 10
+        print(f"{character.name}'s power increased to {character.power}.\n")
 
-class Store(object):
-
-    tonic = SuperTonic()
+class Store:
+    tonic1 = SmallTonic()
+    tonic2 = SuperTonic()
     armor = Armor()
     evade = Evade()
-    items = [tonic, armor, evade]
+    sword = Sword()
+    items = [tonic1, tonic2, armor, evade, sword]
 
     def do_shopping(self, hero):
-
         while True:
+            print()
             print("=====================")
             print("Welcome to the store!")
             print("=====================")
             print(f"You have {hero.coins} coins.")
-            print("What do you want to do?")
+            print("What do you want to purchase?\n")
             for i in range(len(Store.items)):
                 item = Store.items[i]
-                print(f"{i + 1}. buy {item.name} ({item.cost})")
-            print("10. leave")
+                print(f"{i + 1}. Buy {item.name}. ({item.cost})\n")
+            print("10. Leave store.")
+            print("-"*55)
             raw_imp = int(input("> "))
             if raw_imp == 10:
                 break
-
             else:
                 ItemToBuy = Store.items[raw_imp - 1]
                 item = ItemToBuy
                 hero.buy(item)
-
     def go_to_store(self, character):
         print("""Would you like to go to the store or continue your journey? 
     1. Go to store.
@@ -182,15 +195,14 @@ class Store(object):
 
 def main():
     hero = Hero("Sir Jaye the Great", 200 , 100, 0, 0) #(name, health, power, bounty/coins, armor)
-    goblin = Goblin("Mudknuckle the Goblin", 100, 15, 10, 5)
-    zombie = Zombie("Graveyard Betty", 1000, 50, 100, 0)
-    medic = Medic("Healy McHealerFace", 200, 10, 15, 5)
-    shadow = Shadow("The Goat Man", 1, 2, 20, 0)
-    oldman = Oldman("Mysterious Old Man", 10, 10, 5, 0)
-    wizard = Wizard("Aleister The Spellcaster", 100, 20, 20, 3)
-    knight = Knight("Sir Gawayne the Handsome", 150, 25, 25, 10)
-    yogi = Yogi("Ravi Shankar", 1, 1, 0, 0)
-    
+    goblin = Goblin("Mudknuckle the Goblin", 100, 15, 10, 5) #(name, health, power, bounty/coins, armor)
+    zombie = Zombie("Graveyard Betty", 1000, 50, 100, 0) #(name, health, power, bounty/coins, armor)
+    medic = Medic("Healy McHealerFace", 200, 10, 15, 5) #(name, health, power, bounty/coins, armor)
+    shadow = Shadow("The Goat Man", 1, 2, 20, 0) #(name, health, power, bounty/coins, armor)
+    oldman = Oldman("Mysterious Old Man", 10, 10, 5, 0) #(name, health, power, bounty/coins, armor)
+    wizard = Wizard("Aleister The Spellcaster", 100, 20, 20, 3) #(name, health, power, bounty/coins, armor)
+    knight = Knight("Sir Gawayne the Handsome", 150, 25, 25, 10) #(name, health, power, bounty/coins, armor)
+    yogi = Yogi("Ravi Shankar", 1, 1, 0, 0) #(name, health, power, bounty/coins, armor)
     store = Store()
 
 
@@ -507,5 +519,5 @@ def main():
     print("You have arrived to the town of Little Ivywood.\n")
     store.go_to_store(hero)
 
-
+    print("THE END.")
 main()
