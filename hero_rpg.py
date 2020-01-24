@@ -10,17 +10,25 @@ import random
 #Characters
 
 class Character:
-    def __init__(self, name, health, power, coins):
+    def __init__(self, name, health, power, coins, armor):
         self.name = name
         self.health = health
         self.power = power
         self.coins = coins
+        self.armor = armor
+        self.evade = 0
     
     def attack(self, enemy):
-        enemy.health -= self.power
-        print(f"{self.name} does {self.power} damage to the {enemy.name}.\n")
+        if enemy.evade > 0:
+            if random.randint(1, ((20/enemy.evade) + 1)) ==3:
+                print(f"{enemy.name} has evaded the attack from {self.name}.")
+        else:
+            self.damage = self.power - enemy.armor
+            enemy.health -= self.damage
+            print(f"{self.name} does {self.damage} damage to the {enemy.name}.\n")
         if enemy.health <= 0:
             print(f"{enemy.name} has been defeated!\n")
+            quit()
 
 
     def alive(self):
@@ -50,6 +58,10 @@ class Hero(Character):
             print(f"{self.name} lands a CRITICAL HIT!\n")
         return self.crit_multi
 
+    def buy(self, item):
+        self.coins -= item.cost
+        item.apply(self)
+
 class Goblin(Character):
     pass
 
@@ -74,10 +86,14 @@ class Oldman(Character):
 class Wizard(Character):
     def attack(self, enemy):
         #Casts a spell dialogue.
-        enemy.health -= self.power
-        print(f"{self.name} casts a spell on {enemy.name} and deals {self.power} damage.\n")
-        if enemy.health <= 0:
-            print(f"{enemy.name} has been defeated!\n")
+        if enemy.evade > 0:
+            if random.randint(1, ((20/enemy.evade) + 1)) ==3:
+                print(f"{enemy.name} has evaded the attack from {self.name}.")
+        else:
+            enemy.health -= self.power
+            print(f"{self.name} casts a spell on {enemy.name} and deals {self.power} damage.\n")
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated!\n")
 
 class Knight(Hero):
     def dialogue(self, hero):
@@ -91,7 +107,7 @@ class Yogi(Character):
 
 #Store
 
-class Tonic(object):
+class SuperTonic(object):
 
     cost = 5
 
@@ -99,32 +115,40 @@ class Tonic(object):
 
     def apply(self, character):
 
-        character.health += 2
+        character.health += 10
 
-        print("{}'s health increased to {}.".format(character.name, character.health))
+        print(f"{character.name}'s health increased to {character.health}.")
 
+class Evade(object):
 
-class Sword(object):
+    cost = 5
+
+    name = 'evade'
+
+    def apply(self, character):
+
+        character.evade += 2
+
+        print(f"{character.name}'s evade has increased to {character.evade}.")
+
+class Armor(object):
 
     cost = 10
 
-    name = 'sword'
+    name = 'armor'
 
-    def apply(self, hero):
+    def apply(self, character):
 
-        hero.power += 2
+        character.armor += 10
 
-        print("{}'s power increased to {}.".format(hero.name, hero.power))
+        print(f"{character.name}'s armor increased to {character.armor}.")
 
 class Store(object):
 
-    # If you define a variable in the scope of a class:
-
-    # This is a class variable and you can access it like
-
-    # Store.items => [Tonic, Sword]
-
-    items = [Tonic, Sword]
+    tonic = SuperTonic()
+    armor = Armor()
+    evade = Evade()
+    items = [tonic, armor, evade]
 
     def do_shopping(self, hero):
 
@@ -143,11 +167,8 @@ class Store(object):
                 break
 
             else:
-
                 ItemToBuy = Store.items[raw_imp - 1]
-
-                item = ItemToBuy()
-
+                item = ItemToBuy
                 hero.buy(item)
 
     def go_to_store(self, character):
@@ -160,15 +181,15 @@ class Store(object):
 
 
 def main():
-    hero = Hero("Sir Jaye the Great", 200, 100, 0)
-    goblin = Goblin("Mudknuckle the Goblin", 100, 15, 10)
-    zombie = Zombie("Graveyard Betty", 1000, 50, 100)
-    medic = Medic("Healy McHealerFace", 200, 10, 15)
-    shadow = Shadow("The Goat Man", 1, 2, 20)
-    oldman = Oldman("Mysterious Old Man", 10, 10, 5)
-    wizard = Wizard("Aleister The Spellcaster", 100, 20, 20)
-    knight = Knight("Sir Gawayne the Handsome", 150, 25, 25)
-    yogi = Yogi("Ravi Shankar", 1, 1, 0)
+    hero = Hero("Sir Jaye the Great", 200 , 100, 0, 0) #(name, health, power, bounty/coins, armor)
+    goblin = Goblin("Mudknuckle the Goblin", 100, 15, 10, 5)
+    zombie = Zombie("Graveyard Betty", 1000, 50, 100, 0)
+    medic = Medic("Healy McHealerFace", 200, 10, 15, 5)
+    shadow = Shadow("The Goat Man", 1, 2, 20, 0)
+    oldman = Oldman("Mysterious Old Man", 10, 10, 5, 0)
+    wizard = Wizard("Aleister The Spellcaster", 100, 20, 20, 3)
+    knight = Knight("Sir Gawayne the Handsome", 150, 25, 25, 10)
+    yogi = Yogi("Ravi Shankar", 1, 1, 0, 0)
     
     store = Store()
 
