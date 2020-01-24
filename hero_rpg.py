@@ -151,9 +151,10 @@ class Store(object):
                 hero.buy(item)
 
     def go_to_store(self, character):
-        store_status = int(input("""Would you like to go to the store or continue journey? 
+        print("""Would you like to go to the store or continue your journey? 
     1. Go to store.
-    2. Continue the journey."""))
+    2. Continue the journey.""")
+        store_status = int(input("> "))
         if store_status == 1:
             self.do_shopping(character)
 
@@ -208,7 +209,6 @@ def main():
             # Goblin attacks Hero
             goblin.attack(hero)
 
-    store.go_to_store(hero)
 
     print()
     print(f"{zombie.name} approaches!\n")
@@ -245,6 +245,7 @@ def main():
             # Zombie attacks Hero
             zombie.attack(hero)
 
+    print("You have arrived to the town of Windermere.\n")
     store.go_to_store(hero)
 
     print()
@@ -283,7 +284,6 @@ def main():
             # Medic attacks Hero
             medic.attack(hero)
 
-    store.go_to_store(hero)
 
     print()
     print(f"{shadow.name} approaches!\n")
@@ -324,6 +324,7 @@ def main():
             # Shadow attacks Hero
             shadow.attack(hero)
 
+    print("You have arrived to the city of Goldcrest.\n")
     store.go_to_store(hero)
 
     print()
@@ -366,7 +367,6 @@ def main():
             # Oldman attacks Hero
             oldman.attack(hero)
 
-    store.go_to_store(hero)
 
     print()
     print(f"{wizard.name} approaches!\n")
@@ -404,6 +404,7 @@ def main():
             # Wizard attacks Hero
             wizard.attack(hero)
 
+    print("You have arrived to the town of Wolfpine.\n")
     store.go_to_store(hero)
 
     print()
@@ -445,7 +446,6 @@ def main():
             print()
             knight.attack(hero)
 
-    store.go_to_store(hero)
 
     print()
     print(f"{yogi.name} approaches!\n")
@@ -483,6 +483,7 @@ def main():
         else:
             print(f"Invalid input {raw_input}.\n")
 
+    print("You have arrived to the town of Little Ivywood.\n")
     store.go_to_store(hero)
 
 
