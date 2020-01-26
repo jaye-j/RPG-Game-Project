@@ -517,7 +517,5 @@ def main():
             print(f"Invalid input {raw_input}.\n")
 
     print("You have arrived to the town of Little Ivywood.\n")
-    store.go_to_store(hero)
-
     print("THE END.")
 main()
