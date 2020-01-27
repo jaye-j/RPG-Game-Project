@@ -112,7 +112,7 @@ class Yogi(Character):
 class SmallTonic:
     def __init__(self):
         self.cost = 5
-        self.name = 'Small Tonic'
+        self.name = 'Small Health Potion'
 
     def apply(self, character):
         character.health += 5
@@ -121,7 +121,7 @@ class SmallTonic:
 class SuperTonic:
     def __init__(self):
         self.cost = 10
-        self.name = 'Super Tonic'
+        self.name = 'Super Health Potion'
 
     def apply(self, character):
         character.health += 10
@@ -130,7 +130,7 @@ class SuperTonic:
 class Evade:
     def __init__(self):
         self.cost = 5
-        self.name = 'Evade'
+        self.name = 'Evade Potion'
         self.use_count = 0
     def apply(self, character):
         self.use_count += 1
@@ -439,7 +439,7 @@ def main():
                         sleep(.5)
                         hero_rpg_ascii_art.bridgeArt()
                         print("You pass the bridge and continue your journey.\n")
-                        sleep(.5)
+                        sleep(1)
                         break
                     else:
                         hero_rpg_ascii_art.oldmanArt()

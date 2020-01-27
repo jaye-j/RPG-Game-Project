@@ -40,8 +40,8 @@ def zombieArt():
 
 def medicArt():
     print("""
-        .----. 
-       ===O===    THIS WONT HURT A BIT...
+        ,----, 
+       |===+==|    THIS WONT HURT A BIT...
       // 6  6 \  /
       |    7   |
        \ '--' /
@@ -52,7 +52,7 @@ def medicArt():
   / [DR]\_ |/ / /|
   |     | \/ / / /
    \  \  \      /
-    \  `-/`  _.`
+    \  `-/`  _./
      `=._`=./\)\n""")
 
 
