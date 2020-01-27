@@ -384,9 +384,8 @@ def main():
     print(f"You approach a {oldman.name} blocking the entrance to the bridge!\n")
     sleep(1)
     while oldman.alive() and hero.alive():
-        print(f"{oldman.name}: 'Solve my riddles if you dare, or death may be the prize you bare!")
-        print()
         hero_rpg_ascii_art.oldmanArt()
+        print(f"{oldman.name}: 'Solve my riddles if you dare, or death may be the prize you bare!\n")
         print("What do you want to do?")
         print(f"1. fight the {oldman.name}")
         print(f"2. Solve the {oldman.name}'s riddles.")
