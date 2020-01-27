@@ -7,6 +7,7 @@
 # 3. flee
 import random
 from time import sleep
+import hero_rpg_ascii_art
 
 #Characters
 
@@ -168,11 +169,9 @@ class Store:
     def do_shopping(self, hero):
         while True:
             print()
-            print("=====================")
-            print("Welcome to the store!")
-            print("=====================")
+            hero_rpg_ascii_art.storeArt()
             print(f"You have {hero.coins} coins.")
-            print("What do you want to purchase?\n")
+            print("Shopkeeper:'Welcome to Ye' Old Store, What do you want to purchase?'\n")
             for i in range(len(Store.items)):
                 item = Store.items[i]
                 print(f"{i + 1}. Buy {item.name}. ({item.cost})\n")
@@ -214,6 +213,7 @@ def main():
         hero.print_status()
         goblin.print_status()
         print()
+        hero_rpg_ascii_art.goblinArt()
         print("What do you want to do?")
         print(f"1. fight {goblin.name}")
         print("2. do nothing")
@@ -253,6 +253,7 @@ def main():
         hero.print_status()
         zombie.print_status()
         print()
+        hero_rpg_ascii_art.zombieArt()
         print("What do you want to do?")
         print(f"1. fight {zombie.name}")
         print("2. do nothing")
@@ -284,6 +285,8 @@ def main():
             zombie.attack(hero)
 
     print("-"*55)
+    print()
+    hero_rpg_ascii_art.townArt1()
     print("You have arrived to the town of Windermere.\n")
     sleep(1)
     store.go_to_store(hero)
@@ -295,6 +298,7 @@ def main():
         hero.print_status()
         medic.print_status()
         print()
+        hero_rpg_ascii_art.medicArt()
         print("What do you want to do?")
         print(f"1. fight {medic.name}")
         print("2. do nothing")
@@ -334,6 +338,7 @@ def main():
         hero.print_status()
         shadow.print_status()
         print()
+        hero_rpg_ascii_art.shadowArt()
         print("What do you want to do?")
         print(f"1. fight {shadow.name}")
         print("2. do nothing")
@@ -369,17 +374,19 @@ def main():
             shadow.attack(hero)
 
     print("-"*55)
-    print("You have arrived to the city of Goldcrest.\n")
+    print()
+    hero_rpg_ascii_art.townArt1()
+    print("You have arrived to the town of Little Ivywood.\n")
     sleep(1)
     store.go_to_store(hero)
 
     print("-"*55)
     print(f"You approach a {oldman.name} blocking the entrance to the bridge!\n")
     sleep(1)
-    print(f"{oldman.name}: 'Solve my riddles if you dare, or death may be the prize you bare!")
-    sleep(.5)
     while oldman.alive() and hero.alive():
+        print(f"{oldman.name}: 'Solve my riddles if you dare, or death may be the prize you bare!")
         print()
+        hero_rpg_ascii_art.oldmanArt()
         print("What do you want to do?")
         print(f"1. fight the {oldman.name}")
         print(f"2. Solve the {oldman.name}'s riddles.")
@@ -399,6 +406,7 @@ def main():
 
         elif raw_input == "2":
             #Riddle option.
+            hero_rpg_ascii_art.oldmanArt()
             print("I’m tall when I’m young, and I’m short when I’m old. What am I?\n")
             sleep(.5)
             print("1. Hopes and dreams.")
@@ -406,6 +414,7 @@ def main():
             print("3. A bird.")
             raw_input = input(">")
             if raw_input == "2":
+                hero_rpg_ascii_art.oldmanArt()
                 print("Correct!\n")
                 sleep(.5)
                 print("What gets wet while drying?\n")
@@ -415,6 +424,7 @@ def main():
                 print("3. A trowel.")
                 raw_input = input(">")
                 if raw_input == "1":
+                    hero_rpg_ascii_art.oldmanArt()
                     print("Correct!\n")
                     sleep(.5)
                     print("If you’ve got me, you want to share me; if you share me, you haven’t kept me. What am I?\n")
@@ -424,20 +434,25 @@ def main():
                     print("3. A Secret.")
                     raw_input = input(">")
                     if raw_input == "3":
+                        hero_rpg_ascii_art.oldmanArt()
                         print("Correct! You may pass my bridge!\n")
                         sleep(.5)
+                        hero_rpg_ascii_art.bridgeArt()
                         print("You pass the bridge and continue your journey.\n")
                         sleep(.5)
                         break
                     else:
+                        hero_rpg_ascii_art.oldmanArt()
                         print("Wrong! You now must pay the consequences with your life!")
                         print(f"The {oldman.name} takes your life in one fell swoop of his hidden blade.")
                         hero.health == 0
                 else:
+                    hero_rpg_ascii_art.oldmanArt()
                     print("Wrong! You now must pay the consequences with your life!")
                     print(f"The {oldman.name} takes your life in one fell swoop of his hidden blade.")
                     hero.health == 0
             else:
+                hero_rpg_ascii_art.oldmanArt()
                 print("Wrong! You now must pay the consequences with your life!")
                 print(f"The {oldman.name} takes your life in one fell swoop of his hidden blade.")
                 hero.health == 0
@@ -464,6 +479,7 @@ def main():
         hero.print_status()
         wizard.print_status()
         print()
+        hero_rpg_ascii_art.wizardArt()
         print("What do you want to do?")
         print(f"1. fight {wizard.name}")
         print("2. do nothing")
@@ -496,6 +512,7 @@ def main():
             wizard.attack(hero)
 
     print("-"*55)
+    hero_rpg_ascii_art.townArt1()
     print("You have arrived to the town of Wolfpine.\n")
     sleep(1)
     store.go_to_store(hero)
@@ -507,6 +524,7 @@ def main():
         hero.print_status()
         knight.print_status()
         print()
+        hero_rpg_ascii_art.knightArt()
         print("What do you want to do?")
         print(f"1. fight {knight.name}")
         print("2. do nothing")
@@ -549,6 +567,7 @@ def main():
         hero.print_status()
         yogi.print_status()
         print()
+        hero_rpg_ascii_art.yogiArt()
         print("What do you want to do?")
         print(f"1. fight {yogi.name}")
         print("2. do nothing")
@@ -581,7 +600,8 @@ def main():
             print(f"Invalid input {raw_input}.\n")
 
     print("-"*55)
-    print("You have arrived to the town of Little Ivywood.\n")
+    hero_rpg_ascii_art.castleArt()
+    print("You have arrived to the city of Goldcrest.\n")
     sleep(1.5)
     print("THE END.")
 main()
