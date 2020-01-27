@@ -49,7 +49,7 @@ class Hero(Character):
         if enemy.health <= 0:
             print(f"{enemy.name} has been defeated!")
             self.coins += enemy.coins
-            print(f"You gained {enemy.coins} coins. You now have {self.coins} coins.")
+            print(f"You gained {enemy.coins} coins. You now have {self.coins} coins.\n")
 
     def crit_multiplier(self):
         #Hero has a 20% chance of doing double the damage to its opponent.
@@ -200,7 +200,7 @@ def main():
     zombie = Zombie("Graveyard Betty", 1000, 50, 100, 0) #(name, health, power, bounty/coins, armor)
     medic = Medic("Healy McHealerFace", 200, 10, 15, 5) #(name, health, power, bounty/coins, armor)
     shadow = Shadow("The Goat Man", 1, 2, 20, 0) #(name, health, power, bounty/coins, armor)
-    oldman = Oldman("Mysterious Old Man", 10, 10, 5, 0) #(name, health, power, bounty/coins, armor)
+    oldman = Oldman("Mysterious Old Man", 1000, 1000, 100, 100) #(name, health, power, bounty/coins, armor)
     wizard = Wizard("Aleister The Spellcaster", 100, 20, 20, 3) #(name, health, power, bounty/coins, armor)
     knight = Knight("Sir Gawayne the Handsome", 150, 25, 25, 10) #(name, health, power, bounty/coins, armor)
     yogi = Yogi("Ravi Shankar", 1, 1, 0, 0) #(name, health, power, bounty/coins, armor)
@@ -221,6 +221,7 @@ def main():
         print("> ", end=' ')
         raw_input = input()
         print("-"*55)
+        print()
 
 
         if raw_input == "1":
@@ -259,6 +260,7 @@ def main():
         print("> ", end=' ')
         raw_input = input()
         print("-"*55)
+        print()
 
         if raw_input == "1":
             # Hero attacks Zombie
@@ -300,6 +302,7 @@ def main():
         print("> ", end=' ')
         raw_input = input()
         print("-"*55)
+        print()
 
         if raw_input == "1":
             # Hero attacks Medic
@@ -338,6 +341,7 @@ def main():
         print("> ", end=' ')
         raw_input = input()
         print("-"*55)
+        print()
 
 
         if raw_input == "1":
@@ -370,19 +374,20 @@ def main():
     store.go_to_store(hero)
 
     print("-"*55)
-    print(f"{oldman.name} approaches!\n")
+    print(f"You approach a {oldman.name} blocking the entrance to the bridge!\n")
     sleep(1)
+    print(f"{oldman.name}: 'Solve my riddles if you dare, or death may be the prize you bare!")
+    sleep(.5)
     while oldman.alive() and hero.alive():
-        hero.print_status()
-        oldman.print_status()
         print()
         print("What do you want to do?")
-        print(f"1. fight {oldman.name}")
-        print("2. do nothing")
-        print("3. flee")
+        print(f"1. fight the {oldman.name}")
+        print(f"2. Solve the {oldman.name}'s riddles.")
+        print("3. do nothing")
         print("> ", end=' ')
         raw_input = input()
         print("-"*55)
+        print()
 
 
         if raw_input == "1":
@@ -392,16 +397,57 @@ def main():
             else:
                 print(f"{oldman.name} dodges the attack!\n")
 
-
         elif raw_input == "2":
+            #Riddle option.
+            print("I’m tall when I’m young, and I’m short when I’m old. What am I?\n")
+            sleep(.5)
+            print("1. Hopes and dreams.")
+            print("2. A candle.")
+            print("3. A bird.")
+            raw_input = input(">")
+            if raw_input == "2":
+                print("Correct!\n")
+                sleep(.5)
+                print("What gets wet while drying?\n")
+                sleep(.5)
+                print("1. A towel.")
+                print("2. A bowel.")
+                print("3. A trowel.")
+                raw_input = input(">")
+                if raw_input == "1":
+                    print("Correct!\n")
+                    sleep(.5)
+                    print("If you’ve got me, you want to share me; if you share me, you haven’t kept me. What am I?\n")
+                    sleep(.5)
+                    print("1. Skittles.")
+                    print("2. Tremendous debt.")
+                    print("3. A Secret.")
+                    raw_input = input(">")
+                    if raw_input == "3":
+                        print("Correct! You may pass my bridge!\n")
+                        sleep(.5)
+                        print("You pass the bridge and continue your journey.\n")
+                        sleep(.5)
+                        break
+                    else:
+                        print("Wrong! You now must pay the consequences with your life!")
+                        print(f"The {oldman.name} takes your life in one fell swoop of his hidden blade.")
+                        hero.health == 0
+                else:
+                    print("Wrong! You now must pay the consequences with your life!")
+                    print(f"The {oldman.name} takes your life in one fell swoop of his hidden blade.")
+                    hero.health == 0
+            else:
+                print("Wrong! You now must pay the consequences with your life!")
+                print(f"The {oldman.name} takes your life in one fell swoop of his hidden blade.")
+                hero.health == 0
+            
+
+
+        elif raw_input == "3":
             #Hero does nothing... idiot.
             print("You're stupid! Why would you do nothing?!\n")
             pass
-
-        elif raw_input == "3":
-            #Hero flees enemy.
-            print(f"{hero.name} flees from {oldman.name}.\n")
-            break
 
         else:
             print(f"Invalid input {raw_input}.\n")
@@ -425,6 +471,7 @@ def main():
         print("> ", end=' ')
         raw_input = input()
         print("-"*55)
+        print()
 
 
         if raw_input == "1":
@@ -466,6 +513,7 @@ def main():
         print("> ", end=' ')
         raw_input = input()
         print("-"*55)
+        print()
 
 
         if raw_input == "1":
@@ -508,16 +556,17 @@ def main():
         print("> ", end=' ')
         raw_input = input()
         print("-"*55)
+        print()
 
 
         if raw_input == "1":
             # Hero attacks yogi but yogi forces hero to flee
             print("Violence is not the answer! BE GONE!\n")
-            print(f"{yogi.name} forces {hero.name} to flee.\n")
+            print(f"{yogi.name} casts a peaceful spell on {hero.name} forcing him to flee.\n")
             break
 
         elif raw_input == "2":
-            print()
+            #Do nothing and the Yogi rewards you with 10 health points.
             print("I bless you with my powers.\n")
             hero.health += 10
             print(f"{yogi.name} has healed you by 10 health points.\n")
@@ -525,7 +574,7 @@ def main():
             break
 
         elif raw_input == "3":
-            print(f"{yogi.name} waves goodbye in a Downward Dog.\n")
+            print(f"{yogi.name} smiles and waves goodbye in a Downward Dog.\n")
             break
 
         else:
