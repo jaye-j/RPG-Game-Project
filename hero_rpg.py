@@ -209,7 +209,7 @@ def main():
 
     print("-"*55)
     print(f"{goblin.name} approaches!\n")
-    sleep(1)
+    sleep(.5)
     while goblin.alive() and hero.alive():
         hero.print_status()
         goblin.print_status()
@@ -248,7 +248,7 @@ def main():
 
     print("-"*55)
     print(f"{zombie.name} approaches!\n")
-    sleep(1)
+    sleep(.5)
     while zombie.alive() and hero.alive():
         hero.print_status()
         zombie.print_status()
@@ -285,12 +285,12 @@ def main():
 
     print("-"*55)
     print("You have arrived to the town of Windermere.\n")
-    sleep(2)
+    sleep(1)
     store.go_to_store(hero)
 
     print("-"*55)
     print(f"{medic.name} approaches!\n")
-    sleep(1)
+    sleep(.5)
     while medic.alive() and hero.alive():
         hero.print_status()
         medic.print_status()
@@ -329,7 +329,7 @@ def main():
 
     print("-"*55)
     print(f"{shadow.name} approaches!\n")
-    sleep(1)
+    sleep(.5)
     while shadow.alive() and hero.alive():
         hero.print_status()
         shadow.print_status()
@@ -370,7 +370,7 @@ def main():
 
     print("-"*55)
     print("You have arrived to the city of Goldcrest.\n")
-    sleep(2)
+    sleep(1)
     store.go_to_store(hero)
 
     print("-"*55)
@@ -459,7 +459,7 @@ def main():
 
     print("-"*55)
     print(f"{wizard.name} approaches!\n")
-    sleep(1)
+    sleep(.5)
     while wizard.alive() and hero.alive():
         hero.print_status()
         wizard.print_status()
@@ -497,11 +497,12 @@ def main():
 
     print("-"*55)
     print("You have arrived to the town of Wolfpine.\n")
+    sleep(1)
     store.go_to_store(hero)
 
     print("-"*55)
     print(f"{knight.name} approaches!\n")
-    sleep(1)
+    sleep(.5)
     while knight.alive() and hero.alive():
         hero.print_status()
         knight.print_status()
@@ -543,8 +544,7 @@ def main():
 
     print("-"*55)
     print(f"{yogi.name} approaches!\n")
-    sleep(1)
-    
+    sleep(.5)
     while yogi.alive() and hero.alive():
         hero.print_status()
         yogi.print_status()
