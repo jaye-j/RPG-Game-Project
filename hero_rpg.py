@@ -6,6 +6,7 @@
 # 2. do nothing - in which case the goblin will attack him anyway
 # 3. flee
 import random
+from time import sleep
 
 #Characters
 
@@ -206,8 +207,9 @@ def main():
     store = Store()
 
 
-    print()
+    print("-"*55)
     print(f"{goblin.name} approaches!\n")
+    sleep(1)
     while goblin.alive() and hero.alive():
         hero.print_status()
         goblin.print_status()
@@ -243,8 +245,9 @@ def main():
             goblin.attack(hero)
 
 
-    print()
+    print("-"*55)
     print(f"{zombie.name} approaches!\n")
+    sleep(1)
     while zombie.alive() and hero.alive():
         hero.print_status()
         zombie.print_status()
@@ -278,11 +281,14 @@ def main():
             # Zombie attacks Hero
             zombie.attack(hero)
 
+    print("-"*55)
     print("You have arrived to the town of Windermere.\n")
+    sleep(2)
     store.go_to_store(hero)
 
-    print()
+    print("-"*55)
     print(f"{medic.name} approaches!\n")
+    sleep(1)
     while medic.alive() and hero.alive():
         hero.print_status()
         medic.print_status()
@@ -318,8 +324,9 @@ def main():
             medic.attack(hero)
 
 
-    print()
+    print("-"*55)
     print(f"{shadow.name} approaches!\n")
+    sleep(1)
     while shadow.alive() and hero.alive():
         hero.print_status()
         shadow.print_status()
@@ -357,11 +364,14 @@ def main():
             # Shadow attacks Hero
             shadow.attack(hero)
 
+    print("-"*55)
     print("You have arrived to the city of Goldcrest.\n")
+    sleep(2)
     store.go_to_store(hero)
 
-    print()
+    print("-"*55)
     print(f"{oldman.name} approaches!\n")
+    sleep(1)
     while oldman.alive() and hero.alive():
         hero.print_status()
         oldman.print_status()
@@ -377,7 +387,7 @@ def main():
 
         if raw_input == "1":
             # Hero attacks Oldman
-            if random.randint(1, 6) == 2:
+            if random.randint(1, 11) == 2:
                 hero.attack(oldman)
             else:
                 print(f"{oldman.name} dodges the attack!\n")
@@ -401,8 +411,9 @@ def main():
             oldman.attack(hero)
 
 
-    print()
+    print("-"*55)
     print(f"{wizard.name} approaches!\n")
+    sleep(1)
     while wizard.alive() and hero.alive():
         hero.print_status()
         wizard.print_status()
@@ -437,11 +448,13 @@ def main():
             # Wizard attacks Hero
             wizard.attack(hero)
 
+    print("-"*55)
     print("You have arrived to the town of Wolfpine.\n")
     store.go_to_store(hero)
 
-    print()
+    print("-"*55)
     print(f"{knight.name} approaches!\n")
+    sleep(1)
     while knight.alive() and hero.alive():
         hero.print_status()
         knight.print_status()
@@ -480,8 +493,10 @@ def main():
             knight.attack(hero)
 
 
-    print()
+    print("-"*55)
     print(f"{yogi.name} approaches!\n")
+    sleep(1)
+    
     while yogi.alive() and hero.alive():
         hero.print_status()
         yogi.print_status()
@@ -516,6 +531,8 @@ def main():
         else:
             print(f"Invalid input {raw_input}.\n")
 
+    print("-"*55)
     print("You have arrived to the town of Little Ivywood.\n")
+    sleep(1.5)
     print("THE END.")
 main()
