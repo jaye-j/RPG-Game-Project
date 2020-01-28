@@ -175,10 +175,10 @@ class Store:
             for i in range(len(Store.items)):
                 item = Store.items[i]
                 print(f"{i + 1}. Buy {item.name}. ({item.cost})\n")
-            print("10. Leave store.")
+            print("6. Leave store.")
             print("-"*55)
             raw_imp = int(input("> "))
-            if raw_imp == 10:
+            if raw_imp == 6:
                 break
             else:
                 ItemToBuy = Store.items[raw_imp - 1]
