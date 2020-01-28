@@ -194,15 +194,15 @@ class Store:
 
 
 def main():
-    hero = Hero("Sir Jaye the Great", 200 , 100, 0, 0) #(name, health, power, bounty/coins, armor)
-    goblin = Goblin("Mudknuckle the Goblin", 100, 15, 10, 5) #(name, health, power, bounty/coins, armor)
+    hero = Hero("Sir Jaye The Great", 200 , 100, 0, 0) #(name, health, power, bounty/coins, armor)
+    goblin = Goblin("Mudknuckle The Goblin", 100, 15, 10, 5) #(name, health, power, bounty/coins, armor)
     zombie = Zombie("Graveyard Betty", 1000, 50, 100, 0) #(name, health, power, bounty/coins, armor)
     medic = Medic("Healy McHealerFace", 200, 10, 15, 5) #(name, health, power, bounty/coins, armor)
     shadow = Shadow("The Goat Man", 1, 2, 20, 0) #(name, health, power, bounty/coins, armor)
     oldman = Oldman("Mysterious Old Man", 1000, 1000, 100, 100) #(name, health, power, bounty/coins, armor)
     wizard = Wizard("Aleister The Spellcaster", 100, 20, 20, 3) #(name, health, power, bounty/coins, armor)
-    knight = Knight("Sir Gawayne the Handsome", 150, 25, 25, 10) #(name, health, power, bounty/coins, armor)
-    yogi = Yogi("Ravi Shankar", 1, 1, 0, 0) #(name, health, power, bounty/coins, armor)
+    knight = Knight("Sir Gawayne The Handsome", 150, 25, 25, 10) #(name, health, power, bounty/coins, armor)
+    yogi = Yogi("Ravi Shankar The Yogi", 1, 1, 0, 0) #(name, health, power, bounty/coins, armor)
     store = Store()
 
 
